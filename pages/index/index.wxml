@@ -1,0 +1,37 @@
+<view class="container {{isDarkMode ? 'dark-mode' : ''}}">
+  <!-- 顶部提示信息，放到上半屏居中 -->
+  <view class="top-half">
+    <view class="top-tip" style="color: {{timeColor}}">
+      🕒 距离上次打卡：
+      <text class="tip-time">{{timeSinceLast.days}} 天 {{timeSinceLast.hours}} 小时 {{timeSinceLast.minutes}} 分 {{timeSinceLast.seconds}} 秒</text>
+    </view>
+  </view>
+
+  <!-- 打卡记录列表 -->
+  <view class="record-list-container">
+    <view class="record-header-container">
+      <view class="record-header">历史打卡记录</view>
+      <view class="clear-records" bindtap="clearRecords">清除历史记录</view>
+    </view>
+    <scroll-view class="record-list" scroll-y="true" scroll-with-animation="{{true}}" scroll-into-view="{{scrollIntoView}}" enhanced="true" show-scrollbar="false">
+      <block wx:for="{{records}}" wx:key="item">
+        <view class="record-card {{index === records.length - 1 ? 'record-card-latest' : ''}} {{index === newRecordIndex ? 'new-record' : ''}}" id="record-{{index}}">
+          <view class="record-info">
+            <text class="record-index">第 {{index + 1}} 次打卡</text>
+            <text class="record-time">{{item}}</text>
+          </view>
+          <!-- 添加撤回按钮，但不显示在最后一条记录上 -->
+          <view wx:if="{{index !== records.length - 1}}" class="revert-btn" bindtap="handleRevert" data-index="{{index}}">←</view>
+        </view>
+      </block>
+      <view wx:if="{{records.length === 0}}" class="no-record">暂无打卡记录</view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="button-area">
+    <button class="btn-punch" bindtap="handlePunch" hover-class="btn-punch-hover" animation="{{buttonAnimation}}">
+      立即打卡
+    </button>
+  </view>
+</view>

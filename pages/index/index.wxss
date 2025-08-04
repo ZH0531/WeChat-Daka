@@ -1,0 +1,313 @@
+/* 布局整体 */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+/* 暗黑模式 */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .top-tip {
+    color: #e0e0e0;
+}
+
+.dark-mode .record-header {
+    color: #e0e0e0;
+}
+
+.dark-mode .record-card {
+    background-color: #2a2a2a;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .record-index {
+    color: #e0e0e0;
+}
+
+.dark-mode .record-time {
+    color: #aaa;
+}
+
+.dark-mode .clear-records {
+    color: #aaa;
+}
+
+.dark-mode .no-record {
+    color: #888;
+    background: rgba(42, 42, 42, 0.8);
+}
+
+.dark-mode .btn-punch {
+    background: linear-gradient(135deg, #2aa24b, #008563);
+}
+
+.dark-mode .revert-btn {
+  background-color: #3a3a3c;
+  color: #e0e0e0;
+}
+  
+  /* 上半部分，用于居中显示提示文字 */
+  .top-half {
+    flex: 0 0 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 60rpx;
+  }
+  
+  /* 顶部提示文字 */
+.top-tip {
+  font-size: 40rpx;
+  text-align: center;
+  margin-top: 80rpx;
+  margin-bottom: 40rpx;
+  padding: 0 30rpx;
+  line-height: 1.5;
+  transition: color 0.5s ease;
+}
+
+.tip-time {
+  font-size: 44rpx;
+  font-weight: 700;
+  display: block;
+  margin-top: 20rpx;
+  transition: all 0.3s;
+}
+  
+  /* 打卡记录区域容器 */
+.record-list-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10rpx;
+  margin-top: 20rpx;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* 记录区域标题容器 */
+.record-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 记录区域标题 */
+.record-header {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #444;
+  position: relative;
+}
+
+.record-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10rpx;
+  width: 60rpx;
+  height: 4rpx;
+  background: #34c759;
+  border-radius: 4rpx;
+}
+
+/* 清除历史记录 */
+.clear-records {
+  font-size: 26rpx;
+  color: #888;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.clear-records:active {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #666;
+}
+
+/* 记录列表 */
+.record-list {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 20rpx;
+}
+
+/* 打卡记录卡片 */
+.record-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 36rpx 40rpx;
+  margin: 0 0 28rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+  position: relative;
+  transition: all 0.3s ease;
+  transform-origin: center center;
+  width: calc(100% - 40rpx);
+  box-sizing: border-box;
+  overflow: hidden; /* 新增：裁切所有超出圆角的内容 */
+}
+
+.record-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6rpx;
+  height: 100%;
+  background: #e0e0e0;
+  /* 此处的圆角已不再需要，父级的overflow:hidden会处理 */
+  transition: background 0.3s ease;
+}
+
+.record-card-latest::before {
+  background: #34c759;
+}
+
+.record-card-latest {
+  
+}
+
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+    transform: translateZ(0);
+  }
+  100% {
+    box-shadow: 0 4rpx 24rpx rgba(52, 199, 89, 0.3);
+    transform: translateZ(0) scale(1.01);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.record-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.record-index {
+  font-weight: 600;
+  font-size: 30rpx;
+  margin-bottom: 8rpx;
+  color: #444;
+}
+
+.record-time {
+  color: #888;
+  font-size: 26rpx;
+}
+  
+  /* 无记录提示 */
+.no-record {
+  text-align: center;
+  color: #aaa;
+  font-size: 28rpx;
+  margin-top: 100rpx;
+  padding: 40rpx 0;
+  background: rgba(255,255,255,0.8);
+  border-radius: 20rpx;
+}
+  
+  /* 打卡按钮区域 */
+.button-area {
+  padding: 40rpx 30rpx env(safe-area-inset-bottom);
+  z-index: 10;
+}
+
+.btn-punch {
+  width: 100%;
+  background: linear-gradient(135deg, #34c759, #00b894);
+  color: white;
+  font-size: 36rpx;
+  font-weight: 600;
+  padding: 28rpx 0;
+  border-radius: 60rpx;
+  box-shadow: 0 10rpx 24rpx rgba(0, 0, 0, 0.15);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0); /* 硬件加速 */
+  will-change: transform; /* 优化动画性能 */
+}
+
+.btn-punch::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.8s;
+}
+
+.btn-punch:active::after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+.btn-punch-hover {
+  transform: scale(0.95) translateY(4rpx);
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
+.new-record {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.revert-btn {
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  color: #888;
+  font-size: 36rpx;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 20rpx;
+  
+  /* 使用行高进行垂直居中，并微调 */
+  text-align: center;
+  line-height: 60rpx; /* 60rpx为基准，+2rpx用于下移 */
+}
+
+.revert-btn:active {
+  background-color: #e0e0e0;
+  transform: scale(0.9);
+}
