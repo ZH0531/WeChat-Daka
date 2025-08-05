@@ -15,7 +15,13 @@
     </view>
     <scroll-view class="record-list" scroll-y="true" scroll-with-animation="{{true}}" scroll-into-view="{{scrollIntoView}}" enhanced="true" show-scrollbar="false">
       <block wx:for="{{records}}" wx:key="item">
-        <view class="record-card {{index === records.length - 1 ? 'record-card-latest' : ''}} {{index === newRecordIndex ? 'new-record' : ''}}" id="record-{{index}}">
+        <view class="record-card {{index === records.length - 1 ? 'record-card-latest' : ''}} {{index === newRecordIndex ? 'new-record' : ''}} {{pressIndex === index ? 'record-card-pressed' : ''}}" 
+              id="record-{{index}}"
+              bindlongpress="handleLongPressRecord" 
+              bindtouchstart="handleTouchStart"
+              bindtouchend="handleTouchEnd"
+              bindtouchcancel="handleTouchEnd"
+              data-index="{{index}}">
           <view class="record-info">
             <text class="record-index">第 {{index + 1}} 次打卡</text>
             <text class="record-time">{{item}}</text>
